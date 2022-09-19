@@ -11,12 +11,15 @@
 
 <my-element></my-element>
 
-<form method="POST" class="container">
+<form id="formElem" method="POST" class="container">
     {% csrf_token %}
 
     {{ form.as_p }}
-    <input type="submit" value="S'inscrire">
 
+    {% for error, message in errors.items %}
+    <h3 style="color: red; font-size: 2rem" class="container">{{ message }}</h3>
+    {% endfor %}
+    <!-- input type="submit" value="S'inscrire" -->
 
 </form>
 

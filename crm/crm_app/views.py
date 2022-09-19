@@ -10,12 +10,17 @@ def home(request):
 
 
 def signup(request):
+    context = {}
+
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("app-index")
-    else:
-        form = UserRegistrationForm()
+        else:
+            context["errors"] = form.errors
 
-    return render(request, "crm_app/signup.html", {"form": form})
+    form = UserRegistrationForm()
+    context["form"] = form
+
+    return render(request, "crm_app/signup.html", context=context)

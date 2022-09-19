@@ -55,7 +55,6 @@ class UserManagementSystem(AbstractBaseUser):
     email: EmailField = models.EmailField(
         unique=True,
         max_length=255,
-        blank=True
     )
     is_active: BooleanField = models.BooleanField(default=True)
     is_admin: BooleanField = models.BooleanField(default=False)
@@ -216,6 +215,7 @@ class BorrowedBook(models.Model):
 
 
 class Ordered(models.Model):
+    send_email_to_publisher: object
     ordered_book: ForeignKey = models.ForeignKey(Book, on_delete=models.CASCADE)
     ordered_to_publisher: ManyToManyField = models.ManyToManyField(PublisherHouse)
     number_of_books: PositiveSmallIntegerField = models.PositiveSmallIntegerField()
